@@ -1,14 +1,5 @@
-package com.gmail.stepura.volodymyr.service.implementation;
+package spring.boot.parser.service.implementation;
 
-import com.gmail.stepura.volodymyr.model.Product;
-import com.gmail.stepura.volodymyr.model.Review;
-import com.gmail.stepura.volodymyr.model.Role;
-import com.gmail.stepura.volodymyr.model.User;
-import com.gmail.stepura.volodymyr.service.CsvToBeanParserService;
-import com.gmail.stepura.volodymyr.service.ProductService;
-import com.gmail.stepura.volodymyr.service.ReviewService;
-import com.gmail.stepura.volodymyr.service.RoleService;
-import com.gmail.stepura.volodymyr.service.UserService;
 import com.univocity.parsers.common.record.Record;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +8,15 @@ import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import spring.boot.parser.model.Product;
+import spring.boot.parser.model.Review;
+import spring.boot.parser.model.Role;
+import spring.boot.parser.model.User;
+import spring.boot.parser.service.CsvToBeanParserService;
+import spring.boot.parser.service.ProductService;
+import spring.boot.parser.service.ReviewService;
+import spring.boot.parser.service.RoleService;
+import spring.boot.parser.service.UserService;
 
 @Log4j
 @Service
@@ -50,14 +50,13 @@ public class CsvToBeanParserImpl implements CsvToBeanParserService {
     }
 
     @Override
-    public void saveBeans(List<Record> records) {
+    public void saveEntities(List<Record> records) {
         log.info("Starting to parse List<Record>");
-        Role roleUser = roleService.getRoleByRoleName(USER);
         Set<User> userHashSet = new HashSet<>();
         Set<Product> productHashSet = new HashSet<>();
 
         for (Record row : records) {
-            userHashSet.add(parseUser(row, roleUser));
+            userHashSet.add(parseUser(row));
             productHashSet.add(parseProduct(row));
         }
 
@@ -73,9 +72,9 @@ public class CsvToBeanParserImpl implements CsvToBeanParserService {
         log.info("Saving of the reviews are successful!");
     }
 
-    private User parseUser(Record row, Role role) {
+    private User parseUser(Record row) {
         Set<Role> roleUserSet = new HashSet<>();
-        roleUserSet.add(role);
+        roleUserSet.add(roleService.getRoleByRoleName(USER));
         return User.builder()
                 .userId(row.getString(USER_ID))
                 .profileName(row.getString(PROFILE_NAME))

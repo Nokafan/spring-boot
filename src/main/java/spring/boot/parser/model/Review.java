@@ -1,4 +1,4 @@
-package com.gmail.stepura.volodymyr.model;
+package spring.boot.parser.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,21 +8,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
-@Entity(name = "reviews")
+@Data
+@NoArgsConstructor
+@Entity
+@Table(name = "reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NonNull
@@ -39,10 +40,10 @@ public class Review {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "helpfulnessNumerator")
+    @Column(name = "helpfulness_Numerator")
     private Long helpfulnessNumerator;
 
-    @Column(name = "helpfulnessDenominator")
+    @Column(name = "helpfulness_Denominator")
     private Long helpfulnessDenominator;
 
     @Column(name = "score")

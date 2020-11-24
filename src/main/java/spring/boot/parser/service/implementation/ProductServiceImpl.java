@@ -1,12 +1,12 @@
-package com.gmail.stepura.volodymyr.service.implementation;
+package spring.boot.parser.service.implementation;
 
-import com.gmail.stepura.volodymyr.model.Product;
-import com.gmail.stepura.volodymyr.repository.ProductRepository;
-import com.gmail.stepura.volodymyr.service.ProductService;
 import java.util.List;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import spring.boot.parser.model.Product;
+import spring.boot.parser.repository.ProductRepository;
+import spring.boot.parser.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -23,8 +23,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> saveAll(Set<Product> productSet) {
-        return productRepository.saveAll(productSet);
+    public List<Product> saveAll(Set<Product> products) {
+        return productRepository.saveAll(products);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product getByProductId(String string) {
-        return productRepository.findProductByProductId(string).orElseThrow();
+    public Product getByProductId(String externalProductId) {
+        return productRepository.findProductByProductId(externalProductId).orElseThrow();
     }
 
     @Override

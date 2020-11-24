@@ -1,8 +1,8 @@
-package com.gmail.stepura.volodymyr.service;
+package spring.boot.parser.service;
 
-import com.gmail.stepura.volodymyr.model.User;
 import java.util.List;
 import java.util.Set;
+import spring.boot.parser.model.User;
 
 public interface UserService {
     User save(User user);
@@ -11,7 +11,7 @@ public interface UserService {
 
     User getById(Long id);
 
-    User getByUserId(String string);
+    User getByUserId(String externalUserId);
 
     List<User> getAll();
 }

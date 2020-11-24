@@ -1,7 +1,7 @@
-package com.gmail.stepura.volodymyr.service;
+package spring.boot.parser.service;
 
-import com.gmail.stepura.volodymyr.model.Role;
 import java.util.List;
+import spring.boot.parser.model.Role;
 
 public interface RoleService {
     Role save(Role role);

@@ -1,11 +1,11 @@
-package com.gmail.stepura.volodymyr.service.implementation;
+package spring.boot.parser.service.implementation;
 
-import com.gmail.stepura.volodymyr.model.Role;
-import com.gmail.stepura.volodymyr.repository.RoleRepository;
-import com.gmail.stepura.volodymyr.service.RoleService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import spring.boot.parser.model.Role;
+import spring.boot.parser.repository.RoleRepository;
+import spring.boot.parser.service.RoleService;
 
 @Service
 public class RoleServiceImpl implements RoleService {

@@ -1,4 +1,4 @@
-package com.gmail.stepura.volodymyr.model;
+package spring.boot.parser.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +15,12 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@RequiredArgsConstructor
 @Entity
+@RequiredArgsConstructor
 @Table(name = "roles")
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NonNull

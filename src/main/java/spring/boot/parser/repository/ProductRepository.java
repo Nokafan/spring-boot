@@ -1,9 +1,9 @@
-package com.gmail.stepura.volodymyr.repository;
+package spring.boot.parser.repository;
 
-import com.gmail.stepura.volodymyr.model.Product;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import spring.boot.parser.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {

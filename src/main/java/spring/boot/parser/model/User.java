@@ -1,9 +1,8 @@
-package com.gmail.stepura.volodymyr.model;
+package spring.boot.parser.model;
 
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,17 +15,16 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 @EqualsAndHashCode(of = {"userId"})
-@Builder
-@Table(name = "users")
+@NoArgsConstructor
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NonNull
@@ -36,7 +34,7 @@ public class User {
     @Column(name = "profile_name")
     private String profileName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     @Column(name = "roles")
     private Set<Role> role;
 

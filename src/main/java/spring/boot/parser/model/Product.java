@@ -1,4 +1,4 @@
-package com.gmail.stepura.volodymyr.model;
+package spring.boot.parser.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,17 +13,16 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Data
 @EqualsAndHashCode(of = {"productId"})
-@Builder
+@NoArgsConstructor
 @Entity
 @Table(name = "products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
     @NonNull

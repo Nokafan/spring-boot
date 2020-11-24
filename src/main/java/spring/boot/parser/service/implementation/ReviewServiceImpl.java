@@ -1,11 +1,11 @@
-package com.gmail.stepura.volodymyr.service.implementation;
+package spring.boot.parser.service.implementation;
 
-import com.gmail.stepura.volodymyr.model.Review;
-import com.gmail.stepura.volodymyr.repository.ReviewRepository;
-import com.gmail.stepura.volodymyr.service.ReviewService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import spring.boot.parser.model.Review;
+import spring.boot.parser.repository.ReviewRepository;
+import spring.boot.parser.service.ReviewService;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -27,8 +27,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Review getByReviewId(Long reviewId) {
-        return reviewRepository.findReviewByReviewId(reviewId);
+    public Review getByReviewId(Long externalReviewId) {
+        return reviewRepository.findReviewByReviewId(externalReviewId);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> saveAll(List<Review> entities) {
-        return reviewRepository.saveAll(entities);
+    public List<Review> saveAll(List<Review> reviews) {
+        return reviewRepository.saveAll(reviews);
     }
 }

@@ -1,4 +1,4 @@
-package com.gmail.stepura.volodymyr;
+package spring.boot.parser;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

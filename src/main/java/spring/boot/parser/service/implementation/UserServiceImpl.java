@@ -1,15 +1,13 @@
-package com.gmail.stepura.volodymyr.service.implementation;
+package spring.boot.parser.service.implementation;
 
-import com.gmail.stepura.volodymyr.model.User;
-import com.gmail.stepura.volodymyr.repository.UserRepository;
-import com.gmail.stepura.volodymyr.service.UserService;
 import java.util.List;
 import java.util.Set;
-import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import spring.boot.parser.model.User;
+import spring.boot.parser.repository.UserRepository;
+import spring.boot.parser.service.UserService;
 
-@Log4j
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -25,8 +23,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> saveAll(Set<User> userSet) {
-        return userRepository.saveAll(userSet);
+    public List<User> saveAll(Set<User> users) {
+        return userRepository.saveAll(users);
     }
 
     @Override
@@ -35,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByUserId(String string) {
-        return userRepository.findUserByUserId(string).orElseThrow();
+    public User getByUserId(String externalUserId) {
+        return userRepository.findUserByUserId(externalUserId).orElseThrow();
     }
 
     @Override

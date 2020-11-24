@@ -1,6 +1,5 @@
-package com.gmail.stepura.volodymyr.service.implementation;
+package spring.boot.parser.service.implementation;
 
-import com.gmail.stepura.volodymyr.service.FileReaderService;
 import com.univocity.parsers.common.DataProcessingException;
 import com.univocity.parsers.common.ParsingContext;
 import com.univocity.parsers.common.RetryableErrorHandler;
@@ -17,16 +16,26 @@ import java.util.List;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import spring.boot.parser.service.CsvParserService;
 
 @Log4j
 @Service
-public class FileReaderServiceImpl implements FileReaderService {
+public class CsvParserServiceImpl implements CsvParserService {
     @Value("${input.file.path}")
     private String fileName;
 
     @Override
-    public List<Record> getRows() {
+    public List<Record> getRecords() {
         log.info("Starting to build parser at getRows() method");
+        CsvParser parser = new CsvParser(getCsvParserSettings());
+        try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(fileName))) {
+            return parser.parseAllRecords(bufferedReader);
+        } catch (IOException e) {
+            throw new RuntimeException("File not found! " + fileName);
+        }
+    }
+
+    private CsvParserSettings getCsvParserSettings() {
         CsvParserSettings parserSettings = new CsvParserSettings();
         parserSettings.setLineSeparatorDetectionEnabled(true);
         parserSettings.setNullValue("null");
@@ -60,11 +69,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         });
         RowListProcessor rowProcessor = new RowListProcessor();
         parserSettings.setProcessor(rowProcessor);
-        CsvParser parser = new CsvParser(parserSettings);
-        try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(fileName))) {
-            return parser.parseAllRecords(bufferedReader);
-        } catch (IOException e) {
-            throw new RuntimeException("File not found! " + fileName);
-        }
+        return parserSettings;
     }
 }
