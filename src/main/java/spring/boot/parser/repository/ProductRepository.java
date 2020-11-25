@@ -7,5 +7,5 @@ import spring.boot.parser.model.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    Optional<Product> findProductByProductId(String string);
+    Optional<Product> findProductByProductId(String productId);
 }

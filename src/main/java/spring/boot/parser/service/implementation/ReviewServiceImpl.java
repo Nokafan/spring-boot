@@ -22,6 +22,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
+    public List<Review> saveAll(Iterable<Review> reviews) {
+        return reviewRepository.saveAll(reviews);
+    }
+
+    @Override
     public Review getById(Long id) {
         return reviewRepository.findById(id).orElseThrow();
     }
@@ -34,10 +39,5 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<Review> getAll() {
         return reviewRepository.findAll();
-    }
-
-    @Override
-    public List<Review> saveAll(List<Review> reviews) {
-        return reviewRepository.saveAll(reviews);
     }
 }

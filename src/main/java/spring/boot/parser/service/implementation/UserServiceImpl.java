@@ -1,7 +1,6 @@
 package spring.boot.parser.service.implementation;
 
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.parser.model.User;
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> saveAll(Set<User> users) {
+    public List<User> saveAll(Iterable<User> users) {
         return userRepository.saveAll(users);
     }
 

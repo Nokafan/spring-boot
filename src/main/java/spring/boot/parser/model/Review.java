@@ -40,10 +40,10 @@ public class Review {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @Column(name = "helpfulness_Numerator")
+    @Column(name = "helpfulness_numerator")
     private Long helpfulnessNumerator;
 
-    @Column(name = "helpfulness_Denominator")
+    @Column(name = "helpfulness_denominator")
     private Long helpfulnessDenominator;
 
     @Column(name = "score")

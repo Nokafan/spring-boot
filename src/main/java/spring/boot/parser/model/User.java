@@ -35,9 +35,7 @@ public class User {
     private String profileName;
 
     @ManyToMany
-    @Column(name = "roles")
     private Set<Role> role;
 
-    @Column(name = "passwords")
     private String password;
 }

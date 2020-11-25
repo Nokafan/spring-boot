@@ -16,11 +16,11 @@ import java.util.List;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import spring.boot.parser.service.CsvParserService;
+import spring.boot.parser.service.RecordToDatabaseService;
 
 @Log4j
 @Service
-public class CsvParserServiceImpl implements CsvParserService {
+public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
     @Value("${input.file.path}")
     private String fileName;
 

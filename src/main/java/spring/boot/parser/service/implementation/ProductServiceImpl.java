@@ -1,7 +1,6 @@
 package spring.boot.parser.service.implementation;
 
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import spring.boot.parser.model.Product;
@@ -23,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> saveAll(Set<Product> products) {
+    public List<Product> saveAll(Iterable<Product> products) {
         return productRepository.saveAll(products);
     }
 

@@ -7,5 +7,5 @@ import spring.boot.parser.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findUserByUserId(String string);
+    Optional<User> findUserByUserId(String userId);
 }
