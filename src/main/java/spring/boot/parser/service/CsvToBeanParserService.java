@@ -4,5 +4,5 @@ import com.univocity.parsers.common.record.Record;
 import java.util.List;
 
 public interface CsvToBeanParserService {
-    void saveEntities(List<Record> records);
+    List<Record> getRecords(String filePath);
 }
