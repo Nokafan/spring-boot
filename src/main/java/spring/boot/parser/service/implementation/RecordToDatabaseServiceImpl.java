@@ -54,9 +54,10 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
         log.info("Starting to parse List<Record>");
         Set<User> userHashSet = new HashSet<>();
         Set<Product> productHashSet = new HashSet<>();
+        Role role = roleService.getRoleByRoleName(USER);
 
         for (Record row : records) {
-            userHashSet.add(parseUser(row));
+            userHashSet.add(parseUser(row, role));
             productHashSet.add(parseProduct(row));
         }
 
@@ -72,9 +73,9 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
         log.info("Saving of the reviews are successful!");
     }
 
-    private User parseUser(Record row) {
+    private User parseUser(Record row, Role role) {
         Set<Role> roleUserSet = new HashSet<>();
-        roleUserSet.add(roleService.getRoleByRoleName(USER));
+        roleUserSet.add(role);
         return User.builder()
                 .userId(row.getString(USER_ID))
                 .profileName(row.getString(PROFILE_NAME))

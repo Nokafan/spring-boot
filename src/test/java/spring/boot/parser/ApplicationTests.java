@@ -13,7 +13,7 @@ public class ApplicationTests {
     private InjectConroller injectConroller;
 
     @Test
-    void contextLoadsInjectConroller_Ok() {
+    void contextLoadedInjectConroller_Ok() {
         assertThat(injectConroller).isNotNull();
     }
 }

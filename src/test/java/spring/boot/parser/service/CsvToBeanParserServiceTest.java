@@ -12,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 class CsvToBeanParserServiceTest {
-    public static final String FILE_EMPTY = "src/main/resources/test_file_empty.csv";
-    private static final String FILE_NOT_EXIST = "src/main/resources/file_not_exist.csv";
-    private static final String FILE_DATA_OK = "src/main/resources/test_file_ok.csv";
+    public static final String FILE_EMPTY = "src/test/resources/test_file_empty.csv";
+    private static final String FILE_NOT_EXIST = "src/test/resources/file_not_exist.csv";
+    private static final String FILE_DATA_OK = "src/test/resources/test_file_ok.csv";
     private static final int TEN = 10;
     private static final int ZERO = 0;
     private static final String RECORD_SUMMARY = "Absolutely wonderful";
