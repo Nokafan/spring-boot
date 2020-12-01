@@ -2,6 +2,7 @@ package spring.boot.parser.service.implementation;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import spring.boot.parser.model.User;
 import spring.boot.parser.repository.UserRepository;
@@ -34,6 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getByUserId(String externalUserId) {
         return userRepository.findUserByUserId(externalUserId).orElseThrow();
+    }
+
+    @Override
+    public List<User> findAllUsersWithPagination(Pageable pageable) {
+        return userRepository.findTopActiveUsers(pageable);
     }
 
     @Override
