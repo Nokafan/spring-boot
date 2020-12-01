@@ -7,5 +7,5 @@ import spring.boot.parser.model.User;
 public interface UserService extends GeneralService<User> {
     User getByUserId(String externalUserId);
 
-    List<User> findAllUsersWithPagination(Pageable pageable);
+    List<User> findTopActiveUsers(Pageable pageable);
 }

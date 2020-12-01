@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAllUsersWithPagination(Pageable pageable) {
+    public List<User> findTopActiveUsers(Pageable pageable) {
         return userRepository.findTopActiveUsers(pageable);
     }
 

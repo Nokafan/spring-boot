@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import spring.boot.parser.dto.UserResponseDto;
-import spring.boot.parser.mapper.UserMapper;
-import spring.boot.parser.service.UserService;
+import spring.boot.parser.dto.ProductResponseDto;
+import spring.boot.parser.mapper.ProductMapper;
+import spring.boot.parser.service.ProductService;
 
 @RestController
-@RequestMapping("/user")
-public class UsersController {
-    private final UserService userService;
-    private final UserMapper userMapper;
+@RequestMapping("/product")
+public class ProductsController {
+    private final ProductService productService;
+    private final ProductMapper productMapper;
 
     @Autowired
-    public UsersController(UserService userService, UserMapper userMapper) {
-        this.userService = userService;
-        this.userMapper = userMapper;
+    public ProductsController(ProductService productService, ProductMapper productMapper) {
+        this.productService = productService;
+        this.productMapper = productMapper;
     }
 
-    @GetMapping("/active")
-    public List<UserResponseDto> getActiveUsers(
+    @GetMapping("/popular")
+    public List<ProductResponseDto> getTopCommentedProducts(
             @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "limit", required = false, defaultValue = "10") Integer limit) {
-        Pageable topUsers = PageRequest.of(page, limit);
-        return userService.findTopActiveUsers(topUsers)
+        Pageable topProducts = PageRequest.of(page, limit);
+        return productService.findTopProductsByReview(topProducts)
                 .stream()
-                .map(userMapper::userToResponceDto)
+                .map(productMapper::productToResponseDto)
                 .collect(Collectors.toList());
     }
 }

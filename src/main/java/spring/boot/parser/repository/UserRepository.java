@@ -12,6 +12,6 @@ import spring.boot.parser.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findUserByUserId(String userId);
 
-    @Query("SELECT r.user FROM Review r group by r.user ORDER BY COUNT(r.user) DESC")
+    @Query("SELECT r.user FROM Review r GROUP BY r.user ORDER BY COUNT(r.user) DESC")
     List<User> findTopActiveUsers(Pageable pageable);
 }
