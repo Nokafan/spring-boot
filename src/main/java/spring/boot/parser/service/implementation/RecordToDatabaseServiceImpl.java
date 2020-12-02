@@ -1,8 +1,10 @@
 package spring.boot.parser.service.implementation;
 
 import com.univocity.parsers.common.record.Record;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.extern.log4j.Log4j;
@@ -12,11 +14,13 @@ import spring.boot.parser.model.Product;
 import spring.boot.parser.model.Review;
 import spring.boot.parser.model.Role;
 import spring.boot.parser.model.User;
+import spring.boot.parser.model.Word;
 import spring.boot.parser.service.ProductService;
 import spring.boot.parser.service.RecordToDatabaseService;
 import spring.boot.parser.service.ReviewService;
 import spring.boot.parser.service.RoleService;
 import spring.boot.parser.service.UserService;
+import spring.boot.parser.service.WordService;
 
 @Log4j
 @Service
@@ -33,20 +37,25 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
     public static final String SUMMARY = "Summary";
     public static final String TEXT = "Text";
     public static final String PASSWORD = "1111";
+    public static final String REGEX_SPLITERATOR = "[^a-zA-Z]+";
+    public static final long DEFAULT_ZERO = 0L;
+    public static final long ONE = 1L;
     private final ReviewService reviewService;
     private final UserService userService;
     private final ProductService productService;
     private final RoleService roleService;
+    private final WordService wordService;
 
     @Autowired
     public RecordToDatabaseServiceImpl(ReviewService reviewService,
                                        UserService userService,
                                        ProductService productService,
-                                       RoleService roleService) {
+                                       RoleService roleService, WordService wordService) {
         this.reviewService = reviewService;
         this.userService = userService;
         this.productService = productService;
         this.roleService = roleService;
+        this.wordService = wordService;
     }
 
     @Override
@@ -54,12 +63,20 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
         log.info("Starting to parse List<Record>");
         Set<User> userHashSet = new HashSet<>();
         Set<Product> productHashSet = new HashSet<>();
+        HashMap<String, Long> wordsMap = new HashMap<>();
         Role role = roleService.getRoleByRoleName(USER);
 
         for (Record row : records) {
             userHashSet.add(parseUser(row, role));
             productHashSet.add(parseProduct(row));
+            countWords(row, wordsMap);
         }
+
+        wordService.saveAll(wordsMap.entrySet()
+                .stream()
+                .map(this::parseWord)
+                .collect(Collectors.toList()));
+        log.info("Saving of the words are successful!");
 
         userService.saveAll(userHashSet);
         log.info("Saving of the users are successful!");
@@ -71,6 +88,14 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
                 .map(this::parseReview)
                 .collect(Collectors.toList()));
         log.info("Saving of the reviews are successful!");
+    }
+
+    private HashMap<String, Long> countWords(Record row, HashMap<String, Long> wordHashMap) {
+        String stringText = row.getString(TEXT).toLowerCase();
+        for (String word : stringText.split(REGEX_SPLITERATOR)) {
+            wordHashMap.put(word, wordHashMap.getOrDefault(word, DEFAULT_ZERO) + ONE);
+        }
+        return wordHashMap;
     }
 
     private User parseUser(Record row, Role role) {
@@ -103,6 +128,13 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
                 .text(row.getString(TEXT).trim())
                 .user(user)
                 .product(product)
+                .build();
+    }
+
+    private Word parseWord(Map.Entry<String, Long> wordHashMap) {
+        return Word.builder()
+                .word(wordHashMap.getKey())
+                .count(wordHashMap.getValue())
                 .build();
     }
 }

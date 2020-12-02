@@ -26,7 +26,7 @@ public class UsersController {
     }
 
     @GetMapping("/active")
-    public List<UserResponseDto> getActiveUsers(
+    public List<UserResponseDto> getTopActiveUsers(
             @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
             @RequestParam(name = "limit", required = false, defaultValue = "10") Integer limit) {
         Pageable topUsers = PageRequest.of(page, limit);

@@ -5,7 +5,7 @@ import java.util.List;
 public interface GeneralService<T> {
     T save(T entity);
 
-    List<T> saveAll(Iterable<T> users);
+    List<T> saveAll(Iterable<T> entities);
 
     T getById(Long id);
 
