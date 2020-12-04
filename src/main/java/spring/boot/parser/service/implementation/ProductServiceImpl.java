@@ -2,6 +2,7 @@ package spring.boot.parser.service.implementation;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import spring.boot.parser.model.Product;
 import spring.boot.parser.repository.ProductRepository;
@@ -34,6 +35,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getByProductId(String externalProductId) {
         return productRepository.findProductByProductId(externalProductId).orElseThrow();
+    }
+
+    @Override
+    public List<Product> findTopProductsByReview(Pageable pageable) {
+        return productRepository.findTopProductsByReview(pageable);
     }
 
     @Override

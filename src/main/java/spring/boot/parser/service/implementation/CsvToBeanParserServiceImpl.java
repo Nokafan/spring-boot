@@ -23,10 +23,9 @@ public class CsvToBeanParserServiceImpl implements CsvToBeanParserService {
 
     @Override
     public List<Record> getRecords(String filePath) {
-        log.info("Starting to build parser at getRows() method");
         CsvParser parser = new CsvParser(getCsvParserSettings());
+        log.info("Finished to build parser at getRows() method");
         try (BufferedReader bufferedReader = Files.newBufferedReader(Paths.get(filePath))) {
-            log.info("Finished to build parser at getRows() method");
             return parser.parseAllRecords(bufferedReader);
         } catch (IOException e) {
             throw new RuntimeException("File not found! " + filePath);
@@ -34,6 +33,7 @@ public class CsvToBeanParserServiceImpl implements CsvToBeanParserService {
     }
 
     private CsvParserSettings getCsvParserSettings() {
+        log.info("Starting to build parser at getRows() method");
         CsvParserSettings parserSettings = new CsvParserSettings();
         parserSettings.setLineSeparatorDetectionEnabled(true);
         parserSettings.setNullValue("null");
