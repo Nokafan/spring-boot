@@ -116,7 +116,7 @@ public class RecordToDatabaseServiceImpl implements RecordToDatabaseService {
     }
 
     private Review parseReview(Record row) {
-        User user = userService.getByUserId(row.getString(USER_ID));
+        User user = userService.getByExternalUserId(row.getString(USER_ID));
         Product product = productService.getByProductId(row.getString(PRODUCT_ID));
         return Review.builder()
                 .reviewId((row.getLong(ID)))

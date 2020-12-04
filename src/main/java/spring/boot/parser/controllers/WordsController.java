@@ -15,7 +15,7 @@ import spring.boot.parser.mapper.WordsMapper;
 import spring.boot.parser.service.WordService;
 
 @RestController
-@RequestMapping("/word")
+@RequestMapping("/words")
 public class WordsController {
     private final WordService wordService;
     private final WordsMapper wordsMapper;

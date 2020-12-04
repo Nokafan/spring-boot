@@ -14,7 +14,7 @@ import spring.boot.parser.mapper.UserMapper;
 import spring.boot.parser.service.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UsersController {
     private final UserService userService;
     private final UserMapper userMapper;

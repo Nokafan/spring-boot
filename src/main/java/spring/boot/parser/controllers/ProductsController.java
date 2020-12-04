@@ -14,7 +14,7 @@ import spring.boot.parser.mapper.ProductMapper;
 import spring.boot.parser.service.ProductService;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductsController {
     private final ProductService productService;
     private final ProductMapper productMapper;

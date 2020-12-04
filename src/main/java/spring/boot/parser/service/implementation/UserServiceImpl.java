@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByUserId(String externalUserId) {
+    public User getByExternalUserId(String externalUserId) {
         return userRepository.findUserByUserId(externalUserId).orElseThrow();
     }
 
